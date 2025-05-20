@@ -202,8 +202,8 @@ div(
     class = "tribute-introduction",
     p(class = "tribute-quote", HTML('"The best thing for being sad," said Merlin, "is to learn something."')),
     p("It's a quote you've shared with us before, and one that feels especially fitting now. Throughout your years at Mount Holyoke, you've lived those words, teaching with brilliance, compassion, and an unwavering belief in your students."),
-    p("Having taught nearly every math course at Mount Holyoke, you've touched countless lives across generations of students. You've been more than a teacher, you've been a mentor, a steadfast advocate, and a constant source of warmth and wisdom. You believed in us before we believed in ourselves, and your encouragement has led so many women into mathematics with newfound confidence."),
-    p("Thank you for everything you have done for us and Mount Holyoke. As you step into this new chapter, we wanted to share just a few messages from those lucky enough to learn from you. Each one carries our deepest gratitude, admiration, and love.")
+    p("Having taught nearly every math course at Mount Holyoke, you've touched countless lives across generations of students. You've been more than a teacher, you've been a mentor, a steadfast advocate, and a constant source of warmth and wisdom. You believed in us before we believed in ourselves."),
+    p("Thank you for everything you have done for us and Mount Holyoke. As you step into this new chapter, we wanted to share a few messages from those lucky enough to learn from you. Each one carries our deepest gratitude, admiration, and love.")
   )
 )
 
