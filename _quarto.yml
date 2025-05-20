@@ -2,7 +2,10 @@ project:
   type: website
   output-dir: docs
   render:
-    - index.qmd
+    - thankyou.qmd
+
+website:
+  favicon: heart.png
 
 format:
   html:
