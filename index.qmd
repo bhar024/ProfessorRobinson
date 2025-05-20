@@ -1,0 +1,229 @@
+---
+title: ""
+format:
+  html:
+    toc: false
+    theme: 
+      light: cosmo
+      dark: darkly
+editor: 
+  preview: html
+---
+
+```{r setup, echo=FALSE, warning=FALSE, message=FALSE}
+library(readr)
+library(dplyr)
+library(htmltools)
+
+tributes <- read_csv("tributes.csv")
+
+tributes <- tributes %>%
+  rename(message = 'My message for Professor Margaret Robinson')
+```
+
+```{r echo = FALSE}
+# Filter out NA messages
+tributes <- tributes %>%
+  filter(!is.na(message)) %>%
+  filter(message != "") 
+```
+
+
+```{r echo = FALSE} 
+htmltools::tags$style("
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;600&family=Lato:wght@300;400;700&display=swap');
+
+body {
+  font-family: 'Lato', sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background-color: #f9f9f9;
+}
+
+.tribute-header {
+  text-align: center;
+  margin: 3rem auto 4rem;
+  max-width: 800px;
+  padding: 0 20px;
+}
+
+.tribute-header h1 {
+  font-family: 'Crimson Pro', serif;
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  color: #2c3e50;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.tribute-introduction {
+  margin-bottom: 2rem;
+}
+
+.tribute-quote {
+  font-family: 'Crimson Pro', serif;
+  font-style: italic;
+  font-size: 1.3rem;
+  margin-bottom: 1.5rem;
+  color: #5a738e;
+  line-height: 1.6;
+  position: relative;
+  padding: 0 20px;
+}
+
+.tribute-quote::before,
+.tribute-quote::after {
+  content: '';
+  position: absolute;
+  width: 40px;
+  height: 1px;
+  background-color: #ccc;
+  top: 50%;
+}
+
+.tribute-quote::before {
+  left: -20px;
+}
+
+.tribute-quote::after {
+  right: -20px;
+}
+
+.tribute-introduction p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  margin-bottom: 1.2rem;
+  color: #4a5568;
+}
+
+.tributes-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 25px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.tribute-card {
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+  padding: 25px;
+  transition: all 0.3s ease;
+  border-top: 3px solid #6c5ce7;
+  position: relative;
+  overflow: hidden;
+}
+
+.tribute-card:hover {
+  transform: translateY(-7px);
+  box-shadow: 0 12px 20px rgba(0,0,0,0.1);
+}
+
+.tribute-card::before {
+  content: '\\201C';
+  position: absolute;
+  top: -10px;
+  left: 10px;
+  font-size: 5rem;
+  color: rgba(108, 92, 231, 0.1);
+  font-family: 'Crimson Pro', serif;
+}
+
+.tribute-content {
+  font-size: 16px;
+  line-height: 1.7;
+  position: relative;
+  z-index: 1;
+}
+
+.tribute-content p {
+  margin: 0;
+  color: #3a3f51;
+}
+
+/* Dark theme adjustments */
+.quarto-dark body {
+  background-color: #1a1a2e;
+  color: #e9ecef;
+}
+
+.quarto-dark .tribute-header h1 {
+  color: #9ab3f5;
+}
+
+.quarto-dark .tribute-quote {
+  color: #a3c4f3;
+}
+
+.quarto-dark .tribute-introduction p {
+  color: #bdc8e4;
+}
+
+.quarto-dark .tribute-card {
+  background-color: #212136;
+  border-top: 3px solid #8a78ff;
+}
+
+.quarto-dark .tribute-card::before {
+  color: rgba(138, 120, 255, 0.1);
+}
+
+.quarto-dark .tribute-content p {
+  color: #d6dae2;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .tribute-header h1 {
+    font-size: 2rem;
+  }
+  
+  .tribute-quote {
+    font-size: 1.1rem;
+  }
+  
+  .tribute-introduction p {
+    font-size: 1rem;
+  }
+}
+")
+
+```
+
+
+```{r echo = FALSE}
+div(
+  class = "tribute-header",
+  h1("Thank You Professor Margaret Robinson"),
+  
+  div(
+    class = "tribute-introduction",
+    p(class = "tribute-quote", HTML('"The best thing for being sad," said Merlin, "is to learn something."')),
+    p("It's a quote you've shared with us before, and one that feels especially fitting now. Throughout your years at Mount Holyoke, you've lived those words by teaching not just with brilliance, but with boundless curiosity, deep compassion, and unwavering belief in your students."),
+    p("Having taught nearly every math course at Mount Holyoke, you've touched countless lives across generations of students. You've been more than a teacher, you've been a mentor, a fierce advocate, and a steady source of warmth and wisdom. You believed in us before we believed in ourselves, and your encouragement has led so many women into mathematics with newfound confidence."),
+    p("As you step into this new chapter, we wanted to share just a few messages from those lucky enough to learn from you. Each one carries our gratitude, our admiration, and our love.")
+  )
+)
+
+# Create the tributes container and add all tribute cards
+tributes_container <- div(class = "tributes-container")
+
+# Add each tribute as a card
+for (i in 1:nrow(tributes)) {
+  tributes_container <- tagAppendChild(
+    tributes_container,
+    div(
+      class = "tribute-card",
+      div(class = "tribute-content", 
+          p(tributes$message[i])
+      )
+    )
+  )
+}
+
+# Print the tributes container to display it
+tributes_container
+```
+
