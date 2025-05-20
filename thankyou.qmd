@@ -111,7 +111,7 @@ body {
   box-shadow: 0 5px 15px rgba(0,0,0,0.05);
   padding: 25px;
   transition: all 0.3s ease;
-  border-top: 3px solid #6c5ce7;
+  border-top: 3px solid #012169;
   position: relative;
   overflow: hidden;
 }
@@ -127,7 +127,7 @@ body {
   top: -10px;
   left: 10px;
   font-size: 5rem;
-  color: rgba(108, 92, 231, 0.1);
+  color: rgba(1, 33, 105, 0.1);
   font-family: 'Crimson Pro', serif;
 }
 
@@ -163,11 +163,11 @@ body {
 
 .quarto-dark .tribute-card {
   background-color: #212136;
-  border-top: 3px solid #8a78ff;
+  border-top: 3px solid #3a5c95;
 }
 
 .quarto-dark .tribute-card::before {
-  color: rgba(138, 120, 255, 0.1);
+  color: rgba(58, 92, 149, 0.1);
 }
 
 .quarto-dark .tribute-content p {
@@ -226,4 +226,3 @@ for (i in 1:nrow(tributes)) {
 # Print the tributes container to display it
 tributes_container
 ```
-
